@@ -25,12 +25,10 @@ IDS568-MLOps/
 ## 🎯 Milestones
 
 ### Milestone 0
-Initial setup and environment configuration for the MLOps course.
-[Details in [Milestone 0 README](./Milestone%200/README.md)]
+Details in [Milestone 0 README](./Milestone%200/README.md)
 
 ### Milestone 1
-[Brief description of what this milestone covers]
-[Details in [Milestone 1 README](./Milestone%201/README.md)]
+Details in [Milestone 1 README](./Milestone%201/README.md)
 
 ## 🛠️ Technologies Used
 
