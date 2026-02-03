@@ -5,3 +5,7 @@ def test_pytest():
 def test_numpy():
     import numpy as np
     assert True
+
+def test_pandas():
+    import pandas as pd
+    assert True
