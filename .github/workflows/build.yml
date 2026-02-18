@@ -3,7 +3,7 @@ name: Build and Test
 on:
   push:
     tags:
-      - 'v*'  # Trigger on version tags like v1.0.0, v1.1.0, etc.
+      - 'v*'
   pull_request:
     branches:
       - main
@@ -24,20 +24,23 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r app/requirements.txt
+          pip install -r "Milestone 2/app/requirements.txt"
           pip install pytest httpx
       
       - name: Train model for tests
-        working-directory: app
-        run: python train_model.py
+        run: |
+          cd "Milestone 2/app"
+          python train_model.py
       
       - name: Run tests
-        run: pytest tests/ -v
+        run: |
+          cd "Milestone 2"
+          pytest tests/ -v
 
   build-and-push:
-    needs: test  # Only runs if tests pass
+    needs: test
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')  # Only on version tags
+    if: startsWith(github.ref, 'refs/tags/v')
     
     steps:
       - name: Checkout code
@@ -60,7 +63,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: "Milestone 2"
           push: true
           tags: |
             ghcr.io/${{ github.repository_owner }}/iris-classifier:${{ steps.version.outputs.VERSION }}
