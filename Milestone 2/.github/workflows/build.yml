@@ -21,19 +21,29 @@ jobs:
         with:
           python-version: '3.11'
       
+      - name: List files to debug
+        run: |
+          pwd
+          ls -la
+          ls -la "Milestone 2/"
+          ls -la "Milestone 2/app/"
+      
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r Milestone\ 2/app/requirements.txt
+          cd "Milestone 2"
+          pip install -r app/requirements.txt
           pip install pytest httpx
       
       - name: Train model for tests
-        working-directory: Milestone 2/app
-        run: python train_model.py
+        run: |
+          cd "Milestone 2/app"
+          python train_model.py
       
       - name: Run tests
-        working-directory: Milestone 2
-        run: pytest tests/ -v
+        run: |
+          cd "Milestone 2"
+          pytest tests/ -v
 
   build-and-push:
     needs: test
@@ -61,7 +71,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: Milestone 2
+          context: "Milestone 2"
           push: true
           tags: |
             ghcr.io/${{ github.repository_owner }}/iris-classifier:${{ steps.version.outputs.VERSION }}
