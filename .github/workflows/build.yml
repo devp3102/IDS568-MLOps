@@ -28,14 +28,12 @@ jobs:
           pip install pytest httpx
       
       - name: Train model for tests
-        run: |
-          cd "Milestone 2/app"
-          python train_model.py
+        working-directory: "Milestone 2/app"
+        run: python train_model.py
       
       - name: Run tests
-        run: |
-          cd "Milestone 2"
-          pytest tests/ -v
+        working-directory: "Milestone 2"
+        run: pytest tests/ -v
 
   build-and-push:
     needs: test
